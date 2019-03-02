@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'layui/css/layui.css' %} ">
+    <title>学员管理系统</title>
+
+</head>
+<body>
+<script src="{% static 'layui/layui.js' %}"></script>
+<script>
+    layui.use('table', function() {
+        var table = layui.table;
+
+//转换静态表格
+        table.init('demo', {
+            height: 400 //设置高度
+            , page:true,
+            limit:10,//注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
+            //支持所有基础参数
+        });
+    })
+</script>
+<h3><a href="/admin/">Admin</a> </h3>
+<!--
+<table  lay-filter="demo">
+<thead>
+<tr >
+        <th lay-data="{sort: true, width:200}">姓名</th>
+        <th lay-data="{field: "1"}">性别</th>
+        <th lay-data="{field: "1"}>职业</th>
+        <th lay-data="{field: "1"}>Email</th>
+        <th lay-data="{field: "1"}>QQ</th>
+        <th lay-data="{field: "1"}>电话</th>
+        <th lay-data="{field: "1"}>申请时间</th>
+    </tr>
+</thead>
+    <tbody>
+
+
+     <tr>
+        <td >kkkkkkk</td>
+        <td>女</td>
+        <td>产品</td>
+        <td>zhansan@6.com</td>
+        <td>123456</td>
+        <td>12345699999</td>
+        <td>2019年2月26日 20:08</td>
+        </tr>
+
+        <tr>
+        <td >abc</td>
+        <td>女</td>
+        <td>test</td>
+        <td>zhansan@6.com</td>
+        <td>123</td>
+        <td>123456</td>
+        <td>2019年2月26日 20:06</td>
+        </tr>
+    </tbody>
+</table>
+-->
+<table lay-filter="demo">
+  <thead>
+    <tr>
+      <th lay-data="{width:100}">昵称</th>
+      <th lay-data="{width:80, sort:true}">积分</th>
+      <th >签名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>贤心1</td>
+      <td>66</td>
+      <td>人生就像是一场修行a</td>
+    </tr>
+    <tr>
+      <td>贤心2</td>
+      <td>88</td>
+      <td>人生就像是一场修行b</td>
+    </tr>
+    <tr>
+      <td>贤心3</td>
+      <td>33</td>
+      <td>人生就像是一场修行c</td>
+    </tr>
+  </tbody>
+</table>
+<hr/>
+
+
+
+</body>
+</html>
