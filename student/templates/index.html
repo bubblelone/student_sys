@@ -1,13 +1,24 @@
 {% load static %}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'bootstrap3/css/bootstrap.min.css' %} ">
     <link rel="stylesheet" href="{% static 'layui/css/layui.css' %} ">
     <title>学员管理系统</title>
 
 </head>
 <body>
+<script src="{% static 'bootstrap3/js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap3/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'layui/layui.js' %}"></script>
 <script>
     layui.use('table', function() {
@@ -21,13 +32,23 @@
             //支持所有基础参数
         });
     })
+
 </script>
 <h3><a href="/admin/">Admin</a> </h3>
+{{ username }} <br>
+<a href="/logout/">退出</a> <br>
+<img src="{% static  '3.jpg' %}" alt="Big Boat">
 <div>
     <form method="post" action="/search_name/">
 {% csrf_token %}
     {{ formQuery }}
     <input type="submit" value="查询">
+    </form>
+    <form method="post" action="/upload/" enctype="multipart/form-data" >
+        {% csrf_token %}
+        {{ uploadform }}
+        <button type="submit"  class="layui-btn" ><i class="layui-icon">&#xe67c;</i>导入</button>
+
     </form>
 </div>
 <table  lay-filter="demo">
@@ -64,7 +85,16 @@
     {{ form }}
     <input type="submit" value="提交" />
 </form>
-
+<form action="/url/to/submit/" method="post" class="form" layout="horizontal">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  {% buttons %}
+    <button type="submit" class="btn btn-primary">
+      {% bootstrap_icon "star" %} Submit
+    </button>
+  {% endbuttons %}
+</form>
+{% bootstrap_button "确定" button_class="btn-primary" %}
 
 </body>
 </html>

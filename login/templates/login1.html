@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>登录</title>
+<link href="{% static 'layui/css/layui.css' %}" rel="stylesheet" >
+</head>
+<body>
+  <div class="container">
+            <div class="col">
+              <form class="layui-form" action="/login/" method="post">
+                  {% csrf_token %}
+                  <h3 class="text-center">欢迎登录</h3>
+                  <div class="layui-form-item">
+                    <label for="id_username" class="layui-form-label">用户名：</label>
+                      <div class="layui-input-inline">
+                    <input type="text" name='username' lay-verify="required" lay-reqtext="请输入用户名"
+                           class="layui-input" id="id_username" placeholder="Username" autocomplete="off" autofocus>
+                          </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label for="id_password" class="layui-form-label">密码：</label>
+                      <div class="layui-input-inline">
+                    <input type="password" name='password' lay-verify="pass"  class="layui-input" id="id_password"
+                           placeholder="Password" autocomplete="off">
+                          </div>
+                  </div>
+                <div>
+                  <a href="/register/" class="text-success "><ins>新用户注册</ins></a>
+                  <button type="submit" class="layui-btn">登录</button>
+                </div>
+              </form>
+            </div>
+    </div> <!-- /container -->
+
+<script src="{% static 'layui/layui.js' %}"></script>
+<script src="{% static 'layui/demo.js' %}"></script>
+</body>
+</html>

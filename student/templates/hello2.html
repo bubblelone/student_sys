@@ -8,65 +8,71 @@
 
 </head>
 <body>
+<!--<form method="post" action="/upload2/" enctype="multipart/form-data">-->
+{% csrf_token %}
+    <button type="button" class="layui-btn" id="test1" value="上传">
+<i class="layui-icon">&#xe67c;</i>
+</button>
+<!--</form>-->
+
+
 <script src="{% static 'layui/layui.js' %}"></script>
 <script>
-    layui.use('table', function() {
-        var table = layui.table;
+    layui.use(['table','upload','layer','jquery'], function() {
+        var table = layui.table,
+            upload = layui.upload,
+            layer = layui.layer,
+             $ = layui.$;
+
+
 
 //转换静态表格
         table.init('demo', {
-            height: 400 //设置高度
+            height: 300 //设置高度
             , page:true,
             limit:10,//注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
             //支持所有基础参数
         });
-    })
+        var uploadInst = upload.render(
+            {
+                elem: '#test1',
+                url: '/upload2/',
+
+                exts: 'jpg|png',
+                data: {
+                    'csrfmiddlewaretoken': function () {
+                        return $(':input:first').val()
+                    }
+                        
+
+                },
+
+
+
+                done: function(res) {
+                    if (res.code == 0){
+                        //layer.msg($("#test1").val());
+                        layer.msg('jfhfj');
+
+                    }
+
+
+                    
+                },
+                error: function () {
+                    
+                }
+            });
+    });
 </script>
 <h3><a href="/admin/">Admin</a> </h3>
-<!--
-<table  lay-filter="demo">
-<thead>
-<tr >
-        <th lay-data="{sort: true, width:200}">姓名</th>
-        <th lay-data="{field: "1"}">性别</th>
-        <th lay-data="{field: "1"}>职业</th>
-        <th lay-data="{field: "1"}>Email</th>
-        <th lay-data="{field: "1"}>QQ</th>
-        <th lay-data="{field: "1"}>电话</th>
-        <th lay-data="{field: "1"}>申请时间</th>
-    </tr>
-</thead>
-    <tbody>
 
-
-     <tr>
-        <td >kkkkkkk</td>
-        <td>女</td>
-        <td>产品</td>
-        <td>zhansan@6.com</td>
-        <td>123456</td>
-        <td>12345699999</td>
-        <td>2019年2月26日 20:08</td>
-        </tr>
-
-        <tr>
-        <td >abc</td>
-        <td>女</td>
-        <td>test</td>
-        <td>zhansan@6.com</td>
-        <td>123</td>
-        <td>123456</td>
-        <td>2019年2月26日 20:06</td>
-        </tr>
-    </tbody>
-</table>
--->
-<table lay-filter="demo">
+<table lay-filter="demo" >
   <thead>
     <tr>
-      <th lay-data="{width:100}">昵称</th>
-      <th lay-data="{width:80, sort:true}">积分</th>
-      <th >签名</th>
+      <th lay-data="{field: '1',width:100}">昵称</th>
+      <th lay-data="{field: '2',width:80, sort:true}">积分</th>
+      <th lay-data="{field: '3'}">签名</th>
     </tr>
   </thead>
   <tbody>

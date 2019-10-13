@@ -25,7 +25,7 @@ SECRET_KEY = 'dx+a)vska-8pgh=hlo!un$qybekt^()=9m(j0d(1!g#e^)g-q8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'student',
+    'bootstrap3',
+    'login',
 ]
 
 MIDDLEWARE = [
@@ -124,3 +126,4 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+LOGIN_URL = '/login/'

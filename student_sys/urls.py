@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 from student import views
+from login import views as l_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,4 +24,19 @@ urlpatterns = [
     path('search_name/', views.search_name),
     path('hello/', views.hello),
 path('hello2/', views.hello2),
+path('upload/', views.excel_upload),
+path('upload2/', views.excel_upload2),
+path('csrf/', views.get_csrf),
+    path('login/PostLogin', l_views.login1),
+re_path(r'^accounts/login$', views.index),
+path('login/', l_views.login2),
+path('logout/', l_views.logout1),
+path('hello3/', views.hello3),
+path('login3/', views.login3),
+path('list1/', views.list1),
+path('list2/', views.list2),
+path('hello4/', views.hello4),
+path('index/', l_views.index),
+path('register/', l_views.register),
+
 ]
