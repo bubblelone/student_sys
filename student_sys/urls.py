@@ -38,5 +38,6 @@ path('list2/', views.list2),
 path('hello4/', views.hello4),
 path('index/', l_views.index),
 path('register/', l_views.register),
+path('login2/', l_views.login4),
 
 ]
