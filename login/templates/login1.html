@@ -6,9 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>登录</title>
 <link href="{% static 'layui/css/layui.css' %}" rel="stylesheet" >
+
+    <style type="text/css">
+.login {
+  margin: 120px auto 0 auto;
+  min-height: 420px;
+  max-width: 420px;
+  padding: 40px;
+  background-color: #ffffff;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 4px;
+  /* overflow-x: hidden; */
+  box-sizing: border-box;
+}
+</style>
 </head>
 <body>
-  <div class="container">
+  <div class="login">
             <div class="col">
               <form class="layui-form" action="/login/" method="post">
                   {% csrf_token %}
@@ -16,20 +31,20 @@
                   <div class="layui-form-item">
                     <label for="id_username" class="layui-form-label">用户名：</label>
                       <div class="layui-input-inline">
-                    <input type="text" name='username' lay-verify="required" lay-reqtext="请输入用户名"
-                           class="layui-input" id="id_username" placeholder="Username" autocomplete="off" autofocus>
+                    <input type="text" name='username'  lay-reqtext="请输入用户名"
+                           class="layui-input" id="id_username" placeholder="Username" autocomplete="off" >
                           </div>
                   </div>
                   <div class="layui-form-item">
                     <label for="id_password" class="layui-form-label">密码：</label>
                       <div class="layui-input-inline">
-                    <input type="password" name='password' lay-verify="pass"  class="layui-input" id="id_password"
-                           placeholder="Password" autocomplete="off">
+                    <input type="password" name='password'   class="layui-input" id="id_password"
+                           placeholder="Password" autocomplete="off" lay-reqtext="请输入密码">
                           </div>
                   </div>
                 <div>
                   <a href="/register/" class="text-success "><ins>新用户注册</ins></a>
-                  <button  class="layui-btn" lay-submit lay-filter="formDemo">登录</button>
+                  <button  class="layui-btn" lay-submit lay-filter="formDemo" style="width:50%;">登录</button>
                 </div>
               </form>
             </div>
@@ -43,10 +58,13 @@ layui.use(['layer', 'form'], function(){
   var form = layui.form,
       layer = layui.layer;
 
+  //layer.msg('hello');
+
   //监听提交
   form.on('submit(formDemo)', function(data){
-    layer.msg(JSON.stringify(data.field));
-    return false;
+    //layer.msg(JSON.stringify(data.field));
+
+
   });
 });
 </script>
