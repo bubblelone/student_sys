@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'student',
     'bootstrap3',
     'login',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 LOGIN_URL = '/login/'
+
+CAPTCHA_IMAGE_SIZE = (80, 45)
+CAPTCHA_LENGTH = 4
+CAPTCHA_TIMEOUT = 1

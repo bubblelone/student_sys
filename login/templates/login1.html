@@ -25,26 +25,36 @@
 <body>
   <div class="login">
             <div class="col">
-              <form class="layui-form" action="/login/" method="post">
+              <form class="layui-form"  method="post">
                   {% csrf_token %}
                   <h3 class="text-center">欢迎登录</h3>
                   <div class="layui-form-item">
                     <label for="id_username" class="layui-form-label">用户名：</label>
                       <div class="layui-input-inline">
-                    <input type="text" name='username'  lay-reqtext="请输入用户名"
+                    <input type="text" name='username'  lay-verify="required" lay-reqtext="请输入用户名"
                            class="layui-input" id="id_username" placeholder="Username" autocomplete="off" >
                           </div>
                   </div>
                   <div class="layui-form-item">
                     <label for="id_password" class="layui-form-label">密码：</label>
                       <div class="layui-input-inline">
-                    <input type="password" name='password'   class="layui-input" id="id_password"
+                    <input type="password" name='password' lay-verify="required"  class="layui-input" id="id_password"
                            placeholder="Password" autocomplete="off" lay-reqtext="请输入密码">
+                          </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label for="id_ver" class="layui-form-label">验证码：</label>
+                      <div class="layui-input-inline">
+                    <input type="text" name='ver' lay-verify="required"  class="layui-input" id="id_ver"
+                           placeholder="验证码" autocomplete="off" lay-reqtext="请输入验证码">
+                          <a href="#" class="captcha"><img src="{{ captcha.image_url }}" alt="点击换一张"
+                          id="id_captcha"></a>
+                          <input value="{{captcha.hashkey}}" name="hashkey" type="hidden" id="id_captcha_0">
                           </div>
                   </div>
                 <div>
                   <a href="/register/" class="text-success "><ins>新用户注册</ins></a>
-                  <button  class="layui-btn" lay-submit lay-filter="formDemo" style="width:50%;">登录</button>
+                  <button  class="layui-btn  layui-btn-normal" lay-submit lay-filter="formDemo" style="width:50%;">登录</button>
                 </div>
               </form>
             </div>
@@ -56,7 +66,8 @@
 //Demo
 layui.use(['layer', 'form'], function(){
   var form = layui.form,
-      layer = layui.layer;
+      layer = layui.layer,
+      $ = layui.$;
 
   //layer.msg('hello');
 
@@ -64,9 +75,56 @@ layui.use(['layer', 'form'], function(){
   form.on('submit(formDemo)', function(data){
     //layer.msg(JSON.stringify(data.field));
 
+      $.ajax({
+          type: 'post',
+          url:'/login',
+          dataType: 'json',
+          data: {"username": $("#id_username").val(), "password": $("#id_password").val(),
+                 'csrfmiddlewaretoken': function () {
+                        return $(':input:first').val()
+          }},
+
+          success: function (data) {
+              if (data.code ==0) {
+                  layer.msg(data.msg, {icon: 1}, function () {
+                      window.location.href = "/index";
+
+                  });
+
+              }
+              else if  (data.code ==1001) {
+                layer.msg(data.msg, {icon: 2});
+              }
+              else if (data.code ==1002) {
+
+                layer.msg(data.msg, {icon: 2});
+              }
+
+              else if (data.code ==1003) {
+
+                layer.msg(data.msg, {icon: 2});
+              }
+          }
+
+      });
+      return false;
+
+
 
   });
 });
+</script>
+
+<script>
+        //<!-- 动态刷新验证码js -->
+        $(document).ready(function(){
+            $('.captcha').click(function () {
+                $.getJSON("/refresh_captcha/", function (result) {
+                    $('#id_captcha').attr('src', result['image_url']);
+                    $('#id_captcha_0').val(result['hashkey'])
+                });
+            });
+        });
 </script>
 
 </body>
