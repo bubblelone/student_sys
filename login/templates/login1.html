@@ -46,7 +46,7 @@
                     <label for="id_ver" class="layui-form-label">验证码：</label>
                       <div class="layui-input-inline">
                     <input type="text" name='ver' lay-verify="required"  class="layui-input" id="id_ver"
-                           placeholder="验证码" autocomplete="off" lay-reqtext="请输入验证码">
+                           placeholder="输入验证码" autocomplete="off" lay-reqtext="请输入验证码">
                           <a href="#" class="captcha"><img src="{{ captcha.image_url }}" alt="点击换一张"
                           id="id_captcha"></a>
                           <input value="{{captcha.hashkey}}" name="hashkey" type="hidden" id="id_captcha_0">
@@ -61,6 +61,7 @@
     </div> <!-- /container -->
 
 <script src="{% static 'layui/layui.js' %}"></script>
+  <script src="{% static 'bootstrap3/js/jquery.min.js' %}"></script>
 
 <script>
 //Demo
@@ -77,7 +78,7 @@ layui.use(['layer', 'form'], function(){
 
       $.ajax({
           type: 'post',
-          url:'/login',
+          url:'/',
           dataType: 'json',
           data: {"username": $("#id_username").val(), "password": $("#id_password").val(),
                  'csrfmiddlewaretoken': function () {
@@ -115,16 +116,29 @@ layui.use(['layer', 'form'], function(){
 });
 </script>
 
-<script>
+<script type="text/javascript">
         //<!-- 动态刷新验证码js -->
         $(document).ready(function(){
             $('.captcha').click(function () {
-                $.getJSON("/refresh_captcha/", function (result) {
+                $.getJSON("../refresh_captcha/", function (result) {
                     $('#id_captcha').attr('src', result['image_url']);
                     $('#id_captcha_0').val(result['hashkey'])
                 });
             });
         });
+</script>
+
+<script type="text/javascript">
+
+        window.onload= function () {
+
+            $.getJSON("../refresh_captcha/", function (result) {
+                    $('#id_captcha').attr('src', result['image_url']);
+                    $('#id_captcha_0').val(result['hashkey'])
+                });
+
+        }
+
 </script>
 
 </body>

@@ -39,6 +39,8 @@ def login2(request):
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
+        ver = request.POST.get("ver")
+        hashkey = request.POST.get("hashkey")
 
 
         if username.strip() == '':
@@ -50,15 +52,22 @@ def login2(request):
                 {"code": 1002,
                  "msg": "密码不能为空"}
             )
+
+        elif ver == '':
+            return JsonResponse({"code":1004, "msg": "验证码不能为空"})
+
+        elif ver and hashkey:
+            if not jarge_captcha(ver, hashkey):
+                return JsonResponse({"code":1005, "msg": "验证码错误"})
         elif username and password:
 
             try:
                 user = models.User.objects.get(name=username)
             except:
                 return JsonResponse(
-                {"code": 1003,
-                 "msg": "用户名或密码错误"}
-            )
+                    {"code": 1003,
+                     "msg": "用户名或密码错误"}
+                )
             if user.password == password:
                 return JsonResponse({"code": 0, "msg": "登录成功"})
             else:

@@ -18,7 +18,7 @@ from django.urls import path, re_path
 from django.urls import include
 from student import views
 from login import views as l_views
-from login.views import refresh_captcha
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -43,7 +43,7 @@ urlpatterns = [
     path('register/', l_views.register),
     path('login2/', l_views.login4),
     path('captcha/', include('captcha.urls')),
-    path('refresh_captcha/', refresh_captcha),
+
 
 
 
