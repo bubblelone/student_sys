@@ -78,7 +78,7 @@ layui.use(['layer', 'form'], function(){
 
       $.ajax({
           type: 'post',
-          url:'/',
+          url:'../login2/',
           dataType: 'json',
           data: {"username": $("#id_username").val(), "password": $("#id_password").val(),
                  'csrfmiddlewaretoken': function () {
