@@ -83,7 +83,9 @@ layui.use(['layer', 'form'], function(){
           data: {"username": $("#id_username").val(), "password": $("#id_password").val(),
                  'csrfmiddlewaretoken': function () {
                         return $(':input:first').val()
-          }},
+
+
+          }, 'ver': $("#id_ver").val(), 'hashkey': $("#id_captcha_0").val()},
 
           success: function (data) {
               if (data.code ==0) {
@@ -102,6 +104,14 @@ layui.use(['layer', 'form'], function(){
               }
 
               else if (data.code ==1003) {
+
+                layer.msg(data.msg, {icon: 2});
+              }
+              else if (data.code ==1004) {
+
+                layer.msg(data.msg, {icon: 2});
+              }
+              else if (data.code ==1005) {
 
                 layer.msg(data.msg, {icon: 2});
               }

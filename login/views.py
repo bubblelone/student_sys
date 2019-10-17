@@ -59,7 +59,7 @@ def login2(request):
         elif ver and hashkey:
             if not jarge_captcha(ver, hashkey):
                 return JsonResponse({"code":1005, "msg": "验证码错误"})
-        elif username and password:
+        if username and password:
 
             try:
                 user = models.User.objects.get(name=username)
