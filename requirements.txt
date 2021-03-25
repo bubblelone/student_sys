@@ -31,7 +31,7 @@ PyQRCode==1.2.1
 pyquery==1.4.0
 python-dateutil==2.6.1
 pytz==2018.7
-PyYAML==3.13
+PyYAML==5.4
 redis==2.10.6
 reportlab==3.4.0
 requests==2.13.0
