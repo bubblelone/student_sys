@@ -10,7 +10,7 @@ itsdangerous==0.24
 jdcal==1.4
 jieba==0.39
 Jinja2==2.9.5
-lxml==3.7.3
+lxml==4.6.3
 MarkupSafe==0.23
 numpy==1.13.3
 olefile==0.44
